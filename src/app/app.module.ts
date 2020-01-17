@@ -8,16 +8,19 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/fr';
+import localeZh from '@angular/common/locales/zh';
 
 import { FormsModule } from '@angular/forms';
 
 export function initializeLocale() {
   // const locale = 'en-US';
   // registerLocaleData(localeEn, locale);
-  const locale = 'it-IT';
-  registerLocaleData(localeIt, locale);
+  // const locale = 'it-IT';
+  // registerLocaleData(localeIt, locale);
   // const locale = 'fr';
   // registerLocaleData(localeFr, locale);
+  const locale = 'zh';
+  registerLocaleData(localeZh, locale);
   return locale;
 }
 
