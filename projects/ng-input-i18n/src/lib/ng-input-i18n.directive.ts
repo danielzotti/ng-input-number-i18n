@@ -10,6 +10,7 @@ import {
 import { Directive, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NumberFormatPipe } from './number-format.pipe';
+import { NgInputI18nService } from './ng-input-i18n.service';
 
 const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -19,7 +20,7 @@ const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
 
 @Directive({
   selector: 'input [ngInputI18n],textarea [ngInputI18n]',
-  providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, DecimalPipe, NumberFormatPipe]
+  providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, DecimalPipe, NumberFormatPipe, NgInputI18nService]
 })
 export class NgInputI18nDirective implements ControlValueAccessor {
 
@@ -38,22 +39,17 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   formattedValue: string;
   realValue: number;
 
-  decimalSeparator = ','; // default for IT
-  groupSeparator = '.'; // default for IT
-  decimalSeparatorPlaceholder = '[DECIMAL]';
-  groupSeparatorPlaceholder = '[GROUP]';
+  decimalSeparator; // = '.'; // default for en-US
+  groupSeparator; // = ','; // default for en-US
 
   onTouch: () => void;
   onModelChange: (_) => void;
 
-  constructor(private el: ElementRef, private decimalPipe: DecimalPipe, private numberFormatPipe: NumberFormatPipe) {
+  constructor(private el: ElementRef, private decimalPipe: DecimalPipe, private numberFormatPipe: NumberFormatPipe, private service: NgInputI18nService) {
     this.input = el.nativeElement;
 
-    // this.decimalSeparator = getLocaleNumberSymbol('it-IT', NumberSymbol.Decimal);
-    // this.groupSeparator = getLocaleNumberSymbol('it-IT', NumberSymbol.Group);
-
-    this.decimalSeparator = getLocaleNumberSymbol('en-US', NumberSymbol.Decimal);
-    this.groupSeparator = getLocaleNumberSymbol('en-US', NumberSymbol.Group);
+    this.decimalSeparator = this.service.getLocaleDecimalSeparator();
+    this.groupSeparator = this.service.getLocaleGroupSeparator();
   }
 
   @HostListener('focus')
@@ -78,7 +74,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
 
   @HostListener('keydown', ['$event'])
   onKeyDown(event) {
-    const e = <KeyboardEvent> event;
+    const e: KeyboardEvent = event;
 
     if (this.isTypingCommonKeys(e)) {
       // let it happen, don't do anything

@@ -1,3 +1,6 @@
-<input ngInputI18n=".2-2" [(ngModel)]="value">
-<br />
-<span>real value: {{value}}</span>
+Locale: {{locale}}
+<ng-container *ngFor="let format of formats">
+  <ng-container *ngFor="let value of values">
+    <p><input [ngInputI18n]="format" [(ngModel)]="value"> {{format}} -> {{value}}</p>
+  </ng-container>
+</ng-container>
