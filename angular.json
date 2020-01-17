@@ -115,6 +115,41 @@
           }
         }
       }
+    },
+    "ng-input-i18n": {
+      "projectType": "library",
+      "root": "projects/ng-input-i18n",
+      "sourceRoot": "projects/ng-input-i18n/src",
+      "prefix": "dz",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-input-i18n/tsconfig.lib.json",
+            "project": "projects/ng-input-i18n/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-input-i18n/src/test.ts",
+            "tsConfig": "projects/ng-input-i18n/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-input-i18n/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-input-i18n/tsconfig.lib.json",
+              "projects/ng-input-i18n/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "ng-input-number-i18n"
 }
