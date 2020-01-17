@@ -1,16 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { NgInputI18nModule } from '../../projects/ng-input-i18n/src/lib/ng-input-i18n.module';
+
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
+import { FormsModule } from '@angular/forms';
+
+export function initializeLocale() {
+  const locale = 'it-IT';
+  registerLocaleData(localeIt, locale); // TODO: da rendere dinamico!
+  return locale;
+}
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    NgInputI18nModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useFactory: initializeLocale,
+    },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -58,7 +58,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-input-number-i18n:build"
+            "browserTarget": "ng-input-number-i18n:build",
+            "port": 4201
           },
           "configurations": {
             "production": {
