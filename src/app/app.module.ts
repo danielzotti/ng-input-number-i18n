@@ -6,11 +6,12 @@ import { NgInputI18nModule } from '../../projects/ng-input-i18n/src/lib/ng-input
 
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
+import localeEn from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 
 export function initializeLocale() {
-  const locale = 'it-IT';
-  registerLocaleData(localeIt, locale); // TODO: da rendere dinamico!
+  const locale = 'en-US';
+  registerLocaleData(localeEn, locale); // TODO: da rendere dinamico!
   return locale;
 }
 

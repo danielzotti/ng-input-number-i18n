@@ -38,16 +38,22 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   formattedValue: string;
   realValue: number;
 
-  decimalSeparator = ',';
+  decimalSeparator = ','; // default for IT
+  groupSeparator = '.'; // default for IT
+  decimalSeparatorPlaceholder = '[DECIMAL]';
+  groupSeparatorPlaceholder = '[GROUP]';
 
   onTouch: () => void;
   onModelChange: (_) => void;
 
   constructor(private el: ElementRef, private decimalPipe: DecimalPipe, private numberFormatPipe: NumberFormatPipe) {
     this.input = el.nativeElement;
-    // this.decimalSeparator =
-    // const locale = getLocaleNumberFormat('it-IT', NumberFormatStyle.Decimal);
-    this.decimalSeparator = getLocaleNumberSymbol('it-IT', NumberSymbol.Decimal);
+
+    // this.decimalSeparator = getLocaleNumberSymbol('it-IT', NumberSymbol.Decimal);
+    // this.groupSeparator = getLocaleNumberSymbol('it-IT', NumberSymbol.Group);
+
+    this.decimalSeparator = getLocaleNumberSymbol('en-US', NumberSymbol.Decimal);
+    this.groupSeparator = getLocaleNumberSymbol('en-US', NumberSymbol.Group);
   }
 
   @HostListener('focus')
@@ -152,7 +158,17 @@ export class NgInputI18nDirective implements ControlValueAccessor {
       // value = parseFloat(value.replace(new RegExp(this.escapeRegExp(this.decimalSeparator), 'g'), '.'));
     }
     const formattedValue = this.numberFormatPipe.transform(value, this.format);
-    return formattedValue ? formattedValue.replace(/\./g, this.decimalSeparator) : formattedValue;
+    // TODO: chiamare una funziona che fa il replace sia di DecimalSeparator che di GroupSeparator
+    //  e utilizzare 2 placeholder per evitare conflitti. ES: [decimal] e [group] al posto di , e . (o viceversa)
+    if (!formattedValue) {
+      return null;
+    }
+    // formattedValue.replace(new RegExp(this.escapeRegExp(this.decimalSeparator), 'g'), '.')
+    //
+    // formattedValue.replace(/\./g, this.decimalSeparatorPlaceholder)
+    // formattedValue.replace(/\./g, this.decimalSeparatorPlaceholder)
+    // return formattedValue.replace(/\./g, this.decimalSeparator);
+    return formattedValue;
   }
 
   getRealValue(value: string | number) {
@@ -182,7 +198,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     this.input.value = value;
   }
 
-  parseFormattedFloat(value) {
+  parseFormattedFloat(value): number {
     return parseFloat(value.replace(new RegExp(this.escapeRegExp(this.decimalSeparator), 'g'), '.'));
   }
 
