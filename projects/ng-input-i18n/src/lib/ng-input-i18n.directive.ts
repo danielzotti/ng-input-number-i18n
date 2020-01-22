@@ -24,7 +24,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   @Input()
   disabled: boolean;
 
-  @Input('onlyPositive')
+  @Input()
   onlyPositive = false;
 
   @Input('ngInputI18n')
