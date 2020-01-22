@@ -8,6 +8,7 @@ import { getLocaleId, getLocaleNumberSymbol } from '@angular/common';
 })
 export class AppComponent {
   values = [
+    100,
     12345678.12567,
     1.16,
     31.166,

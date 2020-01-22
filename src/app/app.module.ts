@@ -15,12 +15,12 @@ import { FormsModule } from '@angular/forms';
 export function initializeLocale() {
   // const locale = 'en-US';
   // registerLocaleData(localeEn, locale);
-  // const locale = 'it-IT';
-  // registerLocaleData(localeIt, locale);
+  const locale = 'it-IT';
+  registerLocaleData(localeIt, locale);
   // const locale = 'fr';
   // registerLocaleData(localeFr, locale);
-  const locale = 'zh';
-  registerLocaleData(localeZh, locale);
+  // const locale = 'zh';
+  // registerLocaleData(localeZh, locale);
   return locale;
 }
 

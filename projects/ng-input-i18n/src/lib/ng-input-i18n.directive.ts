@@ -24,10 +24,14 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   @Input()
   disabled: boolean;
 
+  @Input('onlyPositive')
+  onlyPositive = false;
+
   @Input('ngInputI18n')
   format: string;
 
   input: HTMLTextAreaElement | HTMLInputElement;
+  minusSign = '-';
 
   inputValue: string;
   formattedValue: string;
@@ -70,7 +74,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   onKeyDown(event) {
     const e: KeyboardEvent = event;
 
-    if (this.isTypingCommonKeys(e) || this.isTypingNumbersOrDecimalSeparator(e)) {
+    if (this.isTypingCommonKeys(e) || this.isTypingNumbersOrDecimalSeparatorOrMinus(e)) {
       // let it happen, don't do anything
       return;
     }
@@ -116,6 +120,14 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     if (typeof value === 'string') {
       // check spaces
       value = value.trim().replace(/ /g, '');
+
+      // check "minus" sign
+      const minusIndex = value.indexOf(this.minusSign);
+      const minusNumberParts = value.split(this.minusSign);
+      if (minusNumberParts.length > 1) {
+        value = minusNumberParts.reduce((acc, part) => `${acc + part}`);
+      }
+      value = minusIndex === 0 ? `-${value}` : value;
 
       // check multiple decimal separators
       const numberParts = value.split(this.decimalSeparator);
@@ -186,13 +198,21 @@ export class NgInputI18nDirective implements ControlValueAccessor {
       (e.keyCode >= 35 && e.keyCode <= 39); // home, end, left, right
   }
 
-  private isTypingNumbersOrDecimalSeparator(e: KeyboardEvent) {
+  private isTypingNumbersOrDecimalSeparatorOrMinus(e: KeyboardEvent) {
     return (
       (e.keyCode >= 48 && e.keyCode <= 57) || // number
       (e.keyCode >= 96 && e.keyCode <= 105) || // numpad
+      // only one decimal separator
       (
         e.key === this.decimalSeparator && // decimal separator
-        this.inputValue && this.inputValue.toString().indexOf(this.decimalSeparator) !== -1) // only one decimal separator
+        this.inputValue && this.inputValue.toString().indexOf(this.decimalSeparator) === -1
+      ) ||
+      // only one "minus" at the beginning
+      (
+        e.key === this.minusSign &&
+        !this.onlyPositive &&
+        this.inputValue && this.inputValue.toString().indexOf(this.minusSign) === -1
+      )
     );
   }
 
