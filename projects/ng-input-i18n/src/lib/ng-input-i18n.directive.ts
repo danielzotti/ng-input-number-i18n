@@ -1,10 +1,7 @@
-import {
-  DecimalPipe,
-} from '@angular/common';
 import { Directive, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NumberFormatPipe } from './number-format.pipe';
 import { NgInputI18nService } from './ng-input-i18n.service';
+import { NgInputI18nPipe } from './ng-input-i18n.pipe';
 
 const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -14,7 +11,7 @@ const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
 
 @Directive({
   selector: 'input [ngInputI18n],textarea [ngInputI18n]',
-  providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, DecimalPipe, NumberFormatPipe, NgInputI18nService]
+  providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, NgInputI18nService]
 })
 export class NgInputI18nDirective implements ControlValueAccessor {
 
@@ -30,6 +27,8 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   @Input('ngInputI18n')
   format: string;
 
+  initialValue: string;
+
   input: HTMLTextAreaElement | HTMLInputElement;
   minusSign = '-';
 
@@ -43,7 +42,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   onTouch: () => void;
   onModelChange: (_) => void;
 
-  constructor(private el: ElementRef, private decimalPipe: DecimalPipe, private numberFormatPipe: NumberFormatPipe, private service: NgInputI18nService) {
+  constructor(private el: ElementRef, private numberFormatPipe: NgInputI18nPipe, private service: NgInputI18nService) {
     this.input = el.nativeElement;
 
     this.decimalSeparator = this.service.getLocaleDecimalSeparator();
@@ -59,6 +58,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   @HostListener('blur')
   onBlur() {
     this.setInputValue(this.formattedValue);
+    this.initialValue = this.inputValue;
   }
 
   @HostListener('dblclick')
@@ -74,7 +74,12 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   onKeyDown(event) {
     const e: KeyboardEvent = event;
 
-    if (this.isTypingCommonKeys(e) || this.isTypingNumbersOrDecimalSeparatorOrMinus(e)) {
+    if (this.isTypingEscKey(e)) {
+      this.onChangeNumber(this.initialValue);
+      return;
+    }
+
+    if (this.isTypingCommonKeys(e) || this.isTypingFunctionKeys(e) || this.isTypingNumbersOrDecimalSeparatorOrMinus(e)) {
       // let it happen, don't do anything
       return;
     }
@@ -99,6 +104,8 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   }
 
   writeValue(value: string): void {
+    console.log(value);
+    this.initialValue = value;
     this.calculateValues(value);
     this.setInputValue(this.formattedValue);
   }
@@ -109,9 +116,13 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     this.onTouch();
   }
 
-  // setDisabledState?(isDisabled: boolean): void {
-  //   throw new Error("Method not implemented.");
-  // }
+  setDisabledState?(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.input.disabled = true;
+    } else {
+      this.input.disabled = false;
+    }
+  }
 
   sanitizeValue(value) {
     if (value === null || value === undefined || value === '') {
@@ -153,10 +164,6 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     if (typeof value === 'string') {
       value = this.parseFormattedFloat(value);
     }
-    // const formattedValue = this.numberFormatPipe.transform(value, this.format);
-    // if (!formattedValue) {
-    //   return null;
-    // }
     return this.numberFormatPipe.transform(value, this.format);
   }
 
@@ -189,6 +196,10 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     return parseFloat(value.replace(new RegExp(this.escapeRegExp(this.decimalSeparator), 'g'), '.'));
   }
 
+  private isTypingEscKey(e: KeyboardEvent) {
+    return (e.keyCode === 27);
+  }
+
   private isTypingCommonKeys(e: KeyboardEvent) {
     return [46, 8, 9, 27, 13, 16].indexOf(e.keyCode) !== -1 || // delete, backspace, tab, esc, enter, shift
       (e.keyCode === 65 && (e.ctrlKey || e.metaKey)) || // Ctrl+A
@@ -196,6 +207,10 @@ export class NgInputI18nDirective implements ControlValueAccessor {
       (e.keyCode === 86 && (e.ctrlKey || e.metaKey)) || // Ctrl+V
       (e.keyCode === 88 && (e.ctrlKey || e.metaKey)) || // Ctrl+X
       (e.keyCode >= 35 && e.keyCode <= 39); // home, end, left, right
+  }
+
+  private isTypingFunctionKeys(e: KeyboardEvent) {
+    return (e.keyCode >= 112 && e.keyCode <= 123); // F1-F12
   }
 
   private isTypingNumbersOrDecimalSeparatorOrMinus(e: KeyboardEvent) {

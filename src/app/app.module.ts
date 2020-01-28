@@ -11,16 +11,17 @@ import localeFr from '@angular/common/locales/fr';
 import localeZh from '@angular/common/locales/zh';
 
 import { FormsModule } from '@angular/forms';
+import { CustomFormatPipe } from './custom.pipe';
 
 export function initializeLocale() {
   // const locale = 'en-US';
   // registerLocaleData(localeEn, locale);
-  const locale = 'it-IT';
-  registerLocaleData(localeIt, locale);
   // const locale = 'fr';
   // registerLocaleData(localeFr, locale);
   // const locale = 'zh';
   // registerLocaleData(localeZh, locale);
+  const locale = 'it-IT';
+  registerLocaleData(localeIt, locale);
   return locale;
 }
 
@@ -32,7 +33,8 @@ export function initializeLocale() {
     BrowserModule,
     CommonModule,
     FormsModule,
-    NgInputI18nModule
+    NgInputI18nModule.forRoot(CustomFormatPipe),
+    // NgInputI18nModule.forRoot(),
   ],
   providers: [
     {

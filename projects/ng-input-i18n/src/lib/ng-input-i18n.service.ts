@@ -11,6 +11,10 @@ export class NgInputI18nService {
   constructor(@Inject(LOCALE_ID) private locale: string) {
   }
 
+  getLocale() {
+    return this.locale;
+  }
+
   getLocaleDecimalSeparator(): string {
     return getLocaleNumberSymbol(this.locale ? this.locale : this.defaultLocale, NumberSymbol.Decimal);
   }
