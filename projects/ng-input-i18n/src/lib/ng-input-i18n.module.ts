@@ -11,12 +11,12 @@ import { NgInputI18nConfig } from './ng-input-i18n.config';
   providers: [DecimalPipe]
 })
 export class NgInputI18nModule {
-  static forRoot(options?: NgInputI18nConfig): ModuleWithProviders {
+  static forRoot(config?: NgInputI18nConfig): ModuleWithProviders {
 
     const configuration = {
       pipe: NgInputI18nPipe,
       production: true,
-      ...options
+      ...config
     };
 
     return {
@@ -34,7 +34,7 @@ export class NgInputI18nModule {
     };
   }
 
-  static forFeature(options?: NgInputI18nConfig): ModuleWithProviders {
-    return NgInputI18nModule.forRoot(options);
+  static forFeature(config?: NgInputI18nConfig): ModuleWithProviders {
+    return NgInputI18nModule.forRoot(config);
   }
 }
