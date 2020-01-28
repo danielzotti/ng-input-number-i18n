@@ -49,6 +49,18 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     this.groupSeparator = this.service.getLocaleGroupSeparator();
   }
 
+  @HostListener('dblclick')
+  showInfo() {
+    if (!this.service.options.production) {
+      console.log({
+        displayedValue: this.inputValue,
+        formattedValue: this.formattedValue,
+        realValue: this.realValue,
+        pipe: this.numberFormatPipe
+      });
+    }
+  }
+
   @HostListener('focus')
   onFocus() {
     this.setInputValue(this.inputValue);
@@ -59,15 +71,6 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   onBlur() {
     this.setInputValue(this.formattedValue);
     this.initialValue = this.inputValue;
-  }
-
-  @HostListener('dblclick')
-  showInfo() {
-    console.log({
-      displayedValue: this.inputValue,
-      formattedValue: this.formattedValue,
-      realValue: this.realValue
-    });
   }
 
   @HostListener('keydown', ['$event'])
@@ -104,14 +107,12 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   }
 
   writeValue(value: string): void {
-    console.log(value);
     this.initialValue = value;
     this.calculateValues(value);
     this.setInputValue(this.formattedValue);
   }
 
   onChange(value) {
-    // console.log('onChange', value);
     this.onModelChange(value);
     this.onTouch();
   }

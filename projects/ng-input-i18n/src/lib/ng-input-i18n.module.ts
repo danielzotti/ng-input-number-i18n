@@ -2,6 +2,7 @@ import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { NgInputI18nDirective } from './ng-input-i18n.directive';
 import { DecimalPipe } from '@angular/common';
 import { NgInputI18nPipe } from './ng-input-i18n.pipe';
+import { NgInputI18nConfig } from './ng-input-i18n.config';
 
 @NgModule({
   declarations: [NgInputI18nDirective],
@@ -10,23 +11,30 @@ import { NgInputI18nPipe } from './ng-input-i18n.pipe';
   providers: [DecimalPipe]
 })
 export class NgInputI18nModule {
-  static forRoot(customPipe?: Type<DecimalPipe>): ModuleWithProviders {
-    if (!customPipe) {
-      customPipe = NgInputI18nPipe;
-    }
+  static forRoot(options?: NgInputI18nConfig): ModuleWithProviders {
+
+    const configuration = {
+      pipe: NgInputI18nPipe,
+      production: true,
+      ...options
+    };
+
     return {
       ngModule: NgInputI18nModule,
       providers: [
         {
           provide: NgInputI18nPipe,
-          useClass: customPipe
+          useClass: configuration.pipe
+        },
+        {
+          provide: NgInputI18nConfig,
+          useValue: configuration
         }
       ]
     };
   }
 
-  static forFeature(customPipe: Type<DecimalPipe>): ModuleWithProviders {
-    return NgInputI18nModule.forRoot(customPipe);
+  static forFeature(options?: NgInputI18nConfig): ModuleWithProviders {
+    return NgInputI18nModule.forRoot(options);
   }
-
 }
