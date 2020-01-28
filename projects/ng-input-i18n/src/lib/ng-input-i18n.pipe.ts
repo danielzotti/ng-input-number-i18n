@@ -1,11 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Inject, LOCALE_ID, Pipe, PipeTransform } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 
 @Pipe({
   name: 'numberFormat'
 })
-export class NumberFormatPipe implements PipeTransform {
-  constructor(private decimalPipe: DecimalPipe) {}
+export class NgInputI18nPipe extends DecimalPipe implements PipeTransform {
+  constructor(@Inject(LOCALE_ID) private locale) {
+    super(locale);
+  }
 
   transform(value: string | number, format: string = null): string {
     if (value === null || value === undefined) {
@@ -16,6 +18,6 @@ export class NumberFormatPipe implements PipeTransform {
       value = value.toString();
     }
 
-    return value === '0' ? '-' : !format ? value : this.decimalPipe.transform(value, format);
+    return value === '0' ? '0' : !format ? value : super.transform(value, format);
   }
 }
