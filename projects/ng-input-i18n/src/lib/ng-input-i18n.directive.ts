@@ -56,8 +56,8 @@ export class NgInputI18nDirective implements ControlValueAccessor {
         displayedValue: this.inputValue,
         formattedValue: this.formattedValue,
         realValue: this.realValue,
-        pipe: this.numberFormatPipe,
-        configuration: this.service.configuration
+        configuration: this.service.configuration,
+        // pipe: this.numberFormatPipe,
       });
     }
   }
