@@ -13,9 +13,10 @@ import { NgInputI18nConfig } from './ng-input-i18n.config';
 export class NgInputI18nModule {
   static forRoot(config?: NgInputI18nConfig): ModuleWithProviders {
 
-    const configuration = {
+    const configuration: NgInputI18nConfig = {
       pipe: NgInputI18nPipe,
       production: true,
+      undoOnEsc: true,
       ...config
     };
 
