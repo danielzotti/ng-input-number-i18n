@@ -9,10 +9,10 @@ export class NgInputI18nService {
 
   defaultLocale: 'en-US';
 
-  options: NgInputI18nConfig;
+  configuration: NgInputI18nConfig;
 
-  constructor(@Inject(LOCALE_ID) private locale: string, private configuration: NgInputI18nConfig) {
-    this.options = this.configuration;
+  constructor(@Inject(LOCALE_ID) private locale: string, private config: NgInputI18nConfig) {
+    this.configuration = this.config;
   }
 
   getLocale() {

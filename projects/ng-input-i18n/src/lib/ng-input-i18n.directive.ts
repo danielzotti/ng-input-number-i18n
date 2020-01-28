@@ -51,7 +51,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
 
   @HostListener('dblclick')
   showInfo() {
-    if (!this.service.options.production) {
+    if (!this.service.configuration.production) {
       console.log({
         displayedValue: this.inputValue,
         formattedValue: this.formattedValue,
