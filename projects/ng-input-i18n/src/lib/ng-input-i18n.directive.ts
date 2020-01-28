@@ -15,6 +15,9 @@ const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
 })
 export class NgInputI18nDirective implements ControlValueAccessor {
 
+  @Input('ngInputI18n')
+  format: string;
+
   @Input()
   required: boolean;
 
@@ -23,9 +26,6 @@ export class NgInputI18nDirective implements ControlValueAccessor {
 
   @Input()
   onlyPositive = false;
-
-  @Input('ngInputI18n')
-  format: string;
 
   initialValue: string;
 
@@ -56,7 +56,8 @@ export class NgInputI18nDirective implements ControlValueAccessor {
         displayedValue: this.inputValue,
         formattedValue: this.formattedValue,
         realValue: this.realValue,
-        pipe: this.numberFormatPipe
+        pipe: this.numberFormatPipe,
+        configuration: this.service.configuration
       });
     }
   }
@@ -77,7 +78,7 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   onKeyDown(event) {
     const e: KeyboardEvent = event;
 
-    if (this.isTypingEscKey(e)) {
+    if (this.service.configuration.undoOnEsc && this.isTypingEscKey(e)) {
       this.onChangeNumber(this.initialValue);
       return;
     }

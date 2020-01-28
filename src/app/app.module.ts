@@ -33,8 +33,8 @@ export function initializeLocale() {
     BrowserModule,
     CommonModule,
     FormsModule,
-    // NgInputI18nModule.forRoot({ pipe: CustomFormatPipe, production: false }),
-    NgInputI18nModule.forRoot({ production: false }),
+    // NgInputI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: false }),
+    NgInputI18nModule.forRoot({ production: false, undoOnEsc: true }),
   ],
   providers: [
     {
