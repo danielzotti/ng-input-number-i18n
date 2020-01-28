@@ -1,6 +1,17 @@
 Locale: {{locale}}
-<ng-container *ngFor="let format of formats">
-  <ng-container *ngFor="let value of values">
-    <p><input [ngInputI18n]="format" [(ngModel)]="value"> {{format}} -> {{value}}</p>
-  </ng-container>
-</ng-container>
+
+<p>See <a href="https://angular.io/api/common/DecimalPipe#parameters" target="_blank">DecimalPipe docs</a> to know how
+  to handle <em>digitsInfo</em></p>
+
+<div class="format-container" *ngFor="let format of formats">
+  <div class="format">
+    digitsInfo: {{format}}
+  </div>
+  <div class="item-container" *ngFor="let value of values; index as i">
+    <input class="item" [ngInputI18n]="format" [(ngModel)]="value" *ngIf="i%2 == 0">
+    <textarea class="item" [ngInputI18n]="format" [(ngModel)]="value" *ngIf="i%2 == 1"></textarea>
+    <div class="value">
+        value: {{value}}
+    </div>
+  </div>
+</div>
