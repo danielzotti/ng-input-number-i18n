@@ -3,6 +3,11 @@
   margin-bottom: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid black;
+  @media(min-width:500px){
+    display: inline-block;
+    max-width: 350px;
+    margin-right: 10px;
+  }
 }
 .item-container {
   margin-bottom: 10px;
