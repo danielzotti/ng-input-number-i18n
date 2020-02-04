@@ -1,14 +1,25 @@
+$lightblue: #e1ecf0;
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+:host {
+  font-family:'Roboto';
+}
 .format-container {
   display: block;
   margin-bottom: 30px;
-  padding-bottom: 30px;
-  border-bottom: 1px solid black;
+  padding: 20px;
+  background-color:$lightblue;
+  border-radius: 5px;
   @media(min-width:500px){
     display: inline-block;
-    max-width: 350px;
+    max-width: 250px;
     margin-right: 10px;
   }
 }
+
+.format {
+  margin-bottom: 15px;
+}
+
 .item-container {
   margin-bottom: 10px;
   border:1px solid black;
