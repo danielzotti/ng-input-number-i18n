@@ -1,7 +1,8 @@
-import { Directive, ElementRef, forwardRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { NgInputI18nService } from './ng-input-i18n.service';
 import { NgInputI18nPipe } from './ng-input-i18n.pipe';
+import { OutputValues } from './ng-input-i18n.models';
 
 const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
@@ -13,7 +14,7 @@ const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
   selector: 'input [ngInputI18n],textarea [ngInputI18n]',
   providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, NgInputI18nService]
 })
-export class NgInputI18nDirective implements ControlValueAccessor {
+export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
 
   @Input('ngInputI18n')
   format: string;
@@ -26,6 +27,12 @@ export class NgInputI18nDirective implements ControlValueAccessor {
 
   @Input()
   onlyPositive = false;
+
+  @Input()
+  selectAllOnFocus = true;
+
+  @Output()
+  ngInputI18nValues: EventEmitter<OutputValues> = new EventEmitter<OutputValues>();
 
   initialValue: string;
 
@@ -49,6 +56,14 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     this.groupSeparator = this.service.getLocaleGroupSeparator();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes && changes.format && !changes.format.firstChange) {
+      // If format value changes, the format process should be reinit
+      this.writeValue(this.inputValue);
+    }
+  }
+
+
   @HostListener('dblclick')
   showInfo() {
     if (!this.service.configuration.production) {
@@ -65,7 +80,9 @@ export class NgInputI18nDirective implements ControlValueAccessor {
   @HostListener('focus')
   onFocus() {
     this.setInputValue(this.inputValue);
-    this.input.select();
+    if (this.selectAllOnFocus) {
+      this.input.select();
+    }
   }
 
   @HostListener('blur')
@@ -111,11 +128,13 @@ export class NgInputI18nDirective implements ControlValueAccessor {
     this.initialValue = value;
     this.calculateValues(value);
     this.setInputValue(this.formattedValue);
+    this.updateOutputValues();
   }
 
   onChange(value) {
     this.onModelChange(value);
     this.onTouch();
+    this.updateOutputValues();
   }
 
   setDisabledState?(isDisabled: boolean): void {
@@ -235,5 +254,14 @@ export class NgInputI18nDirective implements ControlValueAccessor {
 
   private escapeRegExp(text) {
     return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+
+  updateOutputValues() {
+    this.ngInputI18nValues.emit({
+      formattedValue: this.formattedValue,
+      realValue: this.realValue,
+      inputValue: this.inputValue,
+      format: this.format
+    });
   }
 }

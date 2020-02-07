@@ -1,17 +1,71 @@
-Locale: {{locale}}
+<h1>@danielzotti/ng-input-i18n</h1>
 
-<p>See <a href="https://angular.io/api/common/DecimalPipe#parameters" target="_blank">DecimalPipe docs</a> to know how
-  to handle <em>digitsInfo</em></p>
+<div class="main-example-container">
+  <div class="main-example">
+    <h2>Example</h2>
+    <div class="main-example-info">
+      <table>
+        <tr>
+          <th>Locale</th>
+          <td>{{locale}}</td>
+        </tr>
+        <tr>
+          <th>Format <small>(digitsInfo)</small></th>
+          <!--          <td>{{mainFormat}}</td>-->
+          <td>
+            <select [(ngModel)]="mainFormat">
+              <option *ngFor="let selectedFormat of formats" [ngValue]="selectedFormat">
+                {{selectedFormat}}
+              </option>
+            </select>
+          </td>
+        </tr>
+      </table>
+      <p>See <a href="https://angular.io/api/common/DecimalPipe#parameters" target="_blank">DecimalPipe docs</a> to know
+        how to handle <em>digitsInfo</em></p>
+    </div>
 
-<div class="format-container" *ngFor="let format of formats">
-  <div class="format">
-    digitsInfo: {{format}}
-  </div>
-  <div class="item-container" *ngFor="let value of values; index as i">
-    <input class="item" [ngInputI18n]="format" [(ngModel)]="value" *ngIf="i%2 == 0">
-    <textarea class="item" [ngInputI18n]="format" [(ngModel)]="value" *ngIf="i%2 == 1"></textarea>
-    <div class="value">
-        value: {{value}}
+    <input #inputElement class="main-example-input" [ngInputI18n]="mainFormat" [(ngModel)]="mainValue"
+           (ngInputI18nValues)="updateValues($event)">
+
+    <div class="main-example-output">
+      <table>
+        <thead>
+        <tr>
+          <th>TYPE</th>
+          <th>VALUE</th>
+          <th>NOTE</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr [ngClass]="{ 'current' : !inputElement.matches(':focus')}">
+          <td>Formatted <br><em><small>string</small></em></td>
+          <td><strong>{{outputValues.formattedValue}}</strong></td>
+          <td>displayed in normal condition</td>
+        </tr>
+        <tr [ngClass]="{ 'current' : inputElement.matches(':focus')}">
+          <td>Input <br><em><small>string</small></em></td>
+          <td><strong>{{outputValues.inputValue}}</strong></td>
+          <td>displayed on focus</td>
+        </tr>
+        <tr>
+          <td>Real <br><em><small>number</small></em></td>
+          <td><strong>{{outputValues.realValue}}</strong></td>
+          <td>stored in ngModel</td>
+        </tr>
+        <tr>
+          <td>Value <br><em><small>number</small></em></td>
+          <td><strong>{{mainValue}}</strong></td>
+          <td>stored in <em>mainValue</em> variable</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+
+<!--<ul>-->
+<!--  <li><strong>Value displayed on focus</strong>: normal value but the decimal separator is shown as the current locale </li>-->
+<!--  <li><strong>Value displayed on blur (not focus)</strong>: value is formatted as the current locale</li>-->
+<!--  <li><strong>Real value</strong>: the real value is stored as a javascript number (e.g. 1234.135) and you can find it in the model</li>-->
+<!--</ul>-->

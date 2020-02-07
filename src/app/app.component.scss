@@ -1,8 +1,50 @@
 $lightblue: #e1ecf0;
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Exo&display=swap');
 :host {
-  font-family:'Roboto';
+  font-family:'Exo';
 }
+
+h1 {
+  text-align: center;
+}
+.main-example-container {
+  position: relative;
+}
+.main-example {
+  max-width: 400px;
+  margin:0 auto;
+}
+.main-example-input {
+  font-size: 50px;
+  width:100%;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  margin-bottom:10px;
+}
+
+.main-example-output, .main-example-info {
+  text-align: left;
+  font-size: 14px;
+  margin-bottom:10px;
+  overflow: auto;
+  table {
+    width:100%;
+    border-collapse: collapse;
+    border:1px solid lightgray;
+    td,th {
+      border:1px solid lightgray;
+      padding:5px 10px;
+    }
+    tr {
+      &.current {
+        background-color: $lightblue;
+      }
+    }
+  }
+}
+
+
 .format-container {
   display: block;
   margin-bottom: 30px;
