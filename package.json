@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-docs": "ng build --prod --output-path docs --base-href ng-input-number-i18n"
   },
   "private": true,
   "dependencies": {
