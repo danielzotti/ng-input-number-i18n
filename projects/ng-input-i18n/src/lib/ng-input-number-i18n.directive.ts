@@ -11,12 +11,12 @@ const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
 };
 
 @Directive({
-  selector: 'input [dzInputNumberI18n],textarea [dzInputNumberI18n]',
+  selector: 'input [ngInputNumberI18n],textarea [ngInputNumberI18n]',
   providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, NgInputNumberI18nService]
 })
 export class NgInputNumberI18nDirective implements ControlValueAccessor, OnChanges {
 
-  @Input('dzInputNumberI18n')
+  @Input('ngInputNumberI18n')
   format: string;
 
   @Input()
@@ -32,7 +32,7 @@ export class NgInputNumberI18nDirective implements ControlValueAccessor, OnChang
   selectAllOnFocus = true;
 
   @Output()
-  dzInputNumberI18nValues: EventEmitter<NgInputNumberI18nOutputValues> = new EventEmitter<NgInputNumberI18nOutputValues>();
+  ngInputNumberI18nValues: EventEmitter<NgInputNumberI18nOutputValues> = new EventEmitter<NgInputNumberI18nOutputValues>();
 
   initialValue: string;
 
@@ -253,7 +253,7 @@ export class NgInputNumberI18nDirective implements ControlValueAccessor, OnChang
   }
 
   updateOutputValues() {
-    this.dzInputNumberI18nValues.emit({
+    this.ngInputNumberI18nValues.emit({
       formattedValue: this.formattedValue,
       realValue: this.realValue,
       inputValue: this.inputValue,
