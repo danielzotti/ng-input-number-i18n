@@ -27,7 +27,9 @@ h1 {
   text-align: left;
   font-size: 14px;
   margin-bottom:10px;
-  overflow: auto;
+  @media(max-width:499px) {
+    overflow: auto;
+  }
   table {
     width:100%;
     border-collapse: collapse;
@@ -39,6 +41,18 @@ h1 {
     tr {
       &.current {
         background-color: $lightblue;
+        td:first-child {
+          position: relative;
+          @media(min-width:500px){
+            &:before {
+              content: '→';
+              position: absolute;
+              left:-30px;
+              font-size: 30px;
+              font-weight: bold;
+            }
+          }
+        }
       }
     }
   }
