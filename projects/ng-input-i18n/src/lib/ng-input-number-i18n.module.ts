@@ -8,7 +8,7 @@ import { NgInputNumberI18nConfig } from './ng-input-number-i18n.config';
 @NgModule({
   declarations: [NgInputNumberI18nDirective],
   exports: [NgInputNumberI18nDirective],
-  providers: [DecimalPipe]
+  providers: [NgInputNumberI18nPipe, DecimalPipe]
 })
 export class NgInputNumberI18nModule {
   static forRoot(config?: NgInputNumberI18nConfig): ModuleWithProviders {
