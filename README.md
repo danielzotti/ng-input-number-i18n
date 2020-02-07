@@ -8,4 +8,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Demo
 
-[Live demo](https://danielzotti.github.io/ng-input-number-i18n/docs/) 
+[Live demo](https://danielzotti.github.io/ng-input-number-i18n/) 
