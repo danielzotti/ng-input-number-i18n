@@ -2,52 +2,80 @@ $lightblue: #e1ecf0;
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Exo&display=swap');
 :host {
-  font-family:'Exo';
+  font-family: 'Exo';
+}
+
+code {
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 h1 {
   text-align: center;
 }
-.main-example-container {
-  position: relative;
-}
-.main-example {
-  max-width: 400px;
-  margin:0 auto;
-}
-.main-example-input {
-  font-size: 50px;
-  width:100%;
-  padding: 5px 10px;
-  box-sizing: border-box;
-  margin-bottom:10px;
+ul {
+  li {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
-.main-example-output, .main-example-info {
+.container {
+  position: relative;
+}
+
+.container-inner {
+  max-width: 400px;
+  margin: 0 auto;
+}
+.input-container {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  h5 {
+    margin:0;
+    text-align: center;
+  }
+}
+.input {
+  font-size: 50px;
+  text-align: center;
+  width: 100%;
+  padding: 5px 10px;
+  box-sizing: border-box;
+}
+.info {
+  p {
+    font-size: 13px;
+  }
+}
+.output, .info {
   text-align: left;
-  font-size: 14px;
-  margin-bottom:10px;
-  @media(max-width:499px) {
+  margin-bottom: 10px;
+  @media(max-width: 499px) {
     overflow: auto;
   }
+
   table {
-    width:100%;
+    width: 100%;
     border-collapse: collapse;
-    border:1px solid lightgray;
-    td,th {
-      border:1px solid lightgray;
-      padding:5px 10px;
+    border: 1px solid lightgray;
+
+    td, th {
+      border: 1px solid lightgray;
+      padding: 5px 10px;
     }
+
     tr {
       &.current {
         background-color: $lightblue;
+
         td:first-child {
           position: relative;
-          @media(min-width:500px){
+          @media(min-width: 500px) {
             &:before {
               content: '→';
               position: absolute;
-              left:-30px;
+              left: -30px;
               font-size: 30px;
               font-weight: bold;
             }
@@ -63,9 +91,9 @@ h1 {
   display: block;
   margin-bottom: 30px;
   padding: 20px;
-  background-color:$lightblue;
+  background-color: $lightblue;
   border-radius: 5px;
-  @media(min-width:500px){
+  @media(min-width: 500px) {
     display: inline-block;
     max-width: 250px;
     margin-right: 10px;
@@ -78,11 +106,12 @@ h1 {
 
 .item-container {
   margin-bottom: 10px;
-  border:1px solid black;
-  padding:10px;
+  border: 1px solid black;
+  padding: 10px;
+
   input, textarea {
     max-width: 100%;
-    width:100%;
+    width: 100%;
     display: block;
   }
 }
