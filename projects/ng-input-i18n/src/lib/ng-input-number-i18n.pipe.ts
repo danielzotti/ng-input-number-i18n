@@ -4,7 +4,7 @@ import { DecimalPipe } from '@angular/common';
 @Pipe({
   name: 'numberFormat'
 })
-export class NgInputI18nPipe extends DecimalPipe implements PipeTransform {
+export class NgInputNumberI18nPipe extends DecimalPipe implements PipeTransform {
   constructor(@Inject(LOCALE_ID) private locale) {
     super(locale);
   }

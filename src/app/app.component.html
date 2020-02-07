@@ -27,8 +27,8 @@
     <div class="input-container">
       <h5>Click on the input to see the magic!</h5>
 
-      <input #inputElement class="input" [ngInputI18n]="mainFormat" [(ngModel)]="mainValue"
-             (ngInputI18nValues)="updateValues($event)">
+      <input #inputElement class="input" [dzInputNumberI18n]="mainFormat" [(ngModel)]="mainValue"
+             (dzInputNumberI18nValues)="updateValues($event)">
     </div>
 
     <div class="output">

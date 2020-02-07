@@ -1,17 +1,17 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import { NgInputI18nConfig } from './ng-input-i18n.config';
+import { NgInputNumberI18nConfig } from './ng-input-number-i18n.config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NgInputI18nService {
+export class NgInputNumberI18nService {
 
   defaultLocale: 'en-US';
 
-  configuration: NgInputI18nConfig;
+  configuration: NgInputNumberI18nConfig;
 
-  constructor(@Inject(LOCALE_ID) private locale: string, private config: NgInputI18nConfig) {
+  constructor(@Inject(LOCALE_ID) private locale: string, private config: NgInputNumberI18nConfig) {
     this.configuration = this.config;
   }
 
