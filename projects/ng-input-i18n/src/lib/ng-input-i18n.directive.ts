@@ -68,7 +68,7 @@ export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
   showInfo() {
     if (!this.service.configuration.production) {
       console.log({
-        displayedValue: this.inputValue,
+        inputValue: this.inputValue,
         formattedValue: this.formattedValue,
         realValue: this.realValue,
         configuration: this.service.configuration,

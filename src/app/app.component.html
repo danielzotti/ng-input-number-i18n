@@ -2,7 +2,6 @@
 
 <div class="main-example-container">
   <div class="main-example">
-    <h2>Example</h2>
     <div class="main-example-info">
       <table>
         <tr>
@@ -24,6 +23,8 @@
       <p>See <a href="https://angular.io/api/common/DecimalPipe#parameters" target="_blank">DecimalPipe docs</a> to know
         how to handle <em>digitsInfo</em></p>
     </div>
+
+    <h5>Click on the input to see the magic!</h5>
 
     <input #inputElement class="main-example-input" [ngInputI18n]="mainFormat" [(ngModel)]="mainValue"
            (ngInputI18nValues)="updateValues($event)">
@@ -51,21 +52,21 @@
         <tr>
           <td>Real <br><em><small>number</small></em></td>
           <td><strong>{{outputValues.realValue}}</strong></td>
-          <td>stored in ngModel</td>
-        </tr>
-        <tr>
-          <td>Value <br><em><small>number</small></em></td>
-          <td><strong>{{mainValue}}</strong></td>
-          <td>stored in <em>mainValue</em> variable</td>
+          <td>stored in <em>ngModel</em> and in <em>mainValue</em> variable</td>
         </tr>
         </tbody>
       </table>
     </div>
+    
+    <h5>
+      Customization
+    </h5>
+    <ul>
+      <li><strong>Value displayed on focus</strong>: normal value but the decimal separator is shown as the current locale </li>
+      <li><strong>Value displayed on blur (not focus)</strong>: value is formatted as the current locale</li>
+      <li><strong>Real value</strong>: the real value is stored as a javascript number (e.g. 1234.135) and you can find it in the model</li>
+    </ul>
   </div>
 </div>
 
-<!--<ul>-->
-<!--  <li><strong>Value displayed on focus</strong>: normal value but the decimal separator is shown as the current locale </li>-->
-<!--  <li><strong>Value displayed on blur (not focus)</strong>: value is formatted as the current locale</li>-->
-<!--  <li><strong>Real value</strong>: the real value is stored as a javascript number (e.g. 1234.135) and you can find it in the model</li>-->
-<!--</ul>-->
+
