@@ -1,4 +1,4 @@
-export interface OutputValues {
+export interface NgInputNumberI18nOutputValues {
   realValue: number;
   inputValue: string;
   formattedValue: string;

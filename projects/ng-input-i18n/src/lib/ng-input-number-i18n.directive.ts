@@ -1,22 +1,22 @@
 import { Directive, ElementRef, EventEmitter, forwardRef, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { NgInputI18nService } from './ng-input-i18n.service';
-import { NgInputI18nPipe } from './ng-input-i18n.pipe';
-import { OutputValues } from './ng-input-i18n.models';
+import { NgInputNumberI18nService } from './ng-input-number-i18n.service';
+import { NgInputNumberI18nPipe } from './ng-input-number-i18n.pipe';
+import { NgInputNumberI18nOutputValues } from './ng-input-number-i18n.models';
 
 const INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => NgInputI18nDirective),
+  useExisting: forwardRef(() => NgInputNumberI18nDirective),
   multi: true
 };
 
 @Directive({
-  selector: 'input [ngInputI18n],textarea [ngInputI18n]',
-  providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, NgInputI18nService]
+  selector: 'input [dzInputNumberI18n],textarea [dzInputNumberI18n]',
+  providers: [INPUT_NUMBER_DIRECTIVE_CONTROL_ACCESSOR, NgInputNumberI18nService]
 })
-export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
+export class NgInputNumberI18nDirective implements ControlValueAccessor, OnChanges {
 
-  @Input('ngInputI18n')
+  @Input('dzInputNumberI18n')
   format: string;
 
   @Input()
@@ -32,7 +32,7 @@ export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
   selectAllOnFocus = true;
 
   @Output()
-  ngInputI18nValues: EventEmitter<OutputValues> = new EventEmitter<OutputValues>();
+  dzInputNumberI18nValues: EventEmitter<NgInputNumberI18nOutputValues> = new EventEmitter<NgInputNumberI18nOutputValues>();
 
   initialValue: string;
 
@@ -49,7 +49,7 @@ export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
   onTouch: () => void;
   onModelChange: (_) => void;
 
-  constructor(private el: ElementRef, private numberFormatPipe: NgInputI18nPipe, private service: NgInputI18nService) {
+  constructor(private el: ElementRef, private numberFormatPipe: NgInputNumberI18nPipe, private service: NgInputNumberI18nService) {
     this.input = el.nativeElement;
 
     this.decimalSeparator = this.service.getLocaleDecimalSeparator();
@@ -58,7 +58,7 @@ export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes && changes.format && !changes.format.firstChange) {
-      // If format value changes, the format process should be reinit
+      // If format value changes, the format process should be re-init
       this.writeValue(this.inputValue);
     }
   }
@@ -138,11 +138,7 @@ export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
   }
 
   setDisabledState?(isDisabled: boolean): void {
-    if (isDisabled) {
-      this.input.disabled = true;
-    } else {
-      this.input.disabled = false;
-    }
+    this.input.disabled = isDisabled;
   }
 
   sanitizeValue(value) {
@@ -257,7 +253,7 @@ export class NgInputI18nDirective implements ControlValueAccessor, OnChanges {
   }
 
   updateOutputValues() {
-    this.ngInputI18nValues.emit({
+    this.dzInputNumberI18nValues.emit({
       formattedValue: this.formattedValue,
       realValue: this.realValue,
       inputValue: this.inputValue,

@@ -1,6 +1,5 @@
 import { Component, Inject, LOCALE_ID } from '@angular/core';
-import { getLocaleId, getLocaleNumberSymbol } from '@angular/common';
-import { OutputValues } from '../../projects/ng-input-i18n/src/lib/ng-input-i18n.models';
+import { NgInputNumberI18nOutputValues } from '../../projects/ng-input-i18n/src/lib/ng-input-number-i18n.models';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,7 @@ import { OutputValues } from '../../projects/ng-input-i18n/src/lib/ng-input-i18n
 export class AppComponent {
   mainValue = 1234.1255;
   mainFormat = '.2-2';
-  outputValues: OutputValues;
+  outputValues: NgInputNumberI18nOutputValues;
 
   formats = [
     '.2-2',
@@ -21,7 +20,7 @@ export class AppComponent {
 
   constructor(@Inject(LOCALE_ID) private locale) {}
 
-  updateValues(values: OutputValues){
+  updateValues(values: NgInputNumberI18nOutputValues){
     this.outputValues = values;
   }
 }
