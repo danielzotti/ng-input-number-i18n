@@ -24,3 +24,4 @@ export class AppComponent {
     this.outputValues = values;
   }
 }
+
