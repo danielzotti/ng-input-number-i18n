@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgInputNumberI18nModule } from '../../projects/ng-input-i18n/src/lib/ng-input-number-i18n.module';
+import { NgInputNumberI18nModule } from '../../projects/ng-input-number-i18n/src/lib/ng-input-number-i18n.module';
 
 import { CommonModule, registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';

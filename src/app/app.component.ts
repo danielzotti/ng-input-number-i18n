@@ -1,5 +1,5 @@
 import { Component, Inject, LOCALE_ID } from '@angular/core';
-import { NgInputNumberI18nOutputValues } from '../../projects/ng-input-i18n/src/lib/ng-input-number-i18n.models';
+import { NgInputNumberI18nOutputValues } from '../../projects/ng-input-number-i18n/src/lib/ng-input-number-i18n.models';
 
 @Component({
   selector: 'app-root',
