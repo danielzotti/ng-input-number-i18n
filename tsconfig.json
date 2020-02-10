@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "ng-input-i18n": [
-        "dist/ng-input-i18n"
+      "ng-input-number-i18n": [
+        "dist/ng-input-number-i18n"
       ],
-      "ng-input-i18n/*": [
-        "dist/ng-input-i18n/*"
+      "ng-input-number-i18n/*": [
+        "dist/ng-input-number-i18n/*"
       ]
     }
   },
