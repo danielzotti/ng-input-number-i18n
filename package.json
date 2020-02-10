@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-docs": "ng build --prod --output-path docs --base-href ng-input-number-i18n --aot=false",
-    "build-lib": "ng build --prod ng-input-number-i18n",
+    "build-lib": "ng build ng-input-number-i18n",
     "npm-pack": "cd dist/ng-input-number-i18n && npm pack",
     "package": "npm run build-lib && npm run npm-pack"
   },
