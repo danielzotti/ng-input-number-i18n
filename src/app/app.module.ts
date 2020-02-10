@@ -28,15 +28,17 @@ export function initializeLocale() {
 @NgModule({
   declarations: [
     AppComponent,
+    CustomFormatPipe
   ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule,
-    // NgInputI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: false }),
-    NgInputNumberI18nModule.forRoot({ production: false, undoOnEsc: true }),
+    NgInputNumberI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: false }),
+    // NgInputNumberI18nModule.forRoot({ production: false, undoOnEsc: true }),
   ],
   providers: [
+    CustomFormatPipe,
     {
       provide: LOCALE_ID,
       useFactory: initializeLocale,

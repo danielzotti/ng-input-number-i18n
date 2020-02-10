@@ -1,14 +1,16 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { NgInputNumberI18nDirective } from './ng-input-number-i18n.directive';
 import { NgInputNumberI18nPipe } from './ng-input-number-i18n.pipe';
 import { NgInputNumberI18nConfig } from './ng-input-number-i18n.config';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [NgInputNumberI18nDirective],
-  exports: [NgInputNumberI18nDirective],
-  providers: [NgInputNumberI18nPipe, DecimalPipe]
+  imports: [CommonModule, FormsModule],
+  declarations: [NgInputNumberI18nDirective, NgInputNumberI18nPipe],
+  exports: [NgInputNumberI18nDirective, NgInputNumberI18nPipe],
+  providers: [DecimalPipe]
 })
 export class NgInputNumberI18nModule {
   static forRoot(config?: NgInputNumberI18nConfig): ModuleWithProviders {
