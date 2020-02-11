@@ -12,6 +12,7 @@ export class NgInputNumberI18nService {
   configuration: NgInputNumberI18nConfig;
 
   constructor(@Inject(LOCALE_ID) private locale: string, private config: NgInputNumberI18nConfig) {
+    debugger;
     this.configuration = this.config;
   }
 
