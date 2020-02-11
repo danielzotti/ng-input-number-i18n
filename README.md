@@ -104,7 +104,8 @@ export class AppModule {}
     - the input value is selected on focus   
 
 #### Output
-- `ngInputNumberI18nValues: NgInputNumberI18nOutputValues`: emits an event with various information everytime the values change
+- `ngInputNumberI18nValues: NgInputNumberI18nOutputValues` 
+    - emits an event with various information everytime the values change
 
 ```typescript
 export interface NgInputNumberI18nOutputValues {
