@@ -1,12 +1,17 @@
 # @danielzotti/ng-input-number-i18n
 
-- TODO: DESCRIPTION
+A simple directive which manages decimal numbers in `input` and `textarea` inside a `ngForm`.
+
+- It stores the values as a JavaScript float but it displays the formatted number based on `locale` (with decimal and thousands separator). 
+- On focus, it shows the real number with the decimal separator based on `locale`.
+- It formats numbers using a CustomPipe that extends the DecimalPipe. 
+
+## Try it yourself
 
 - [Live demo](https://danielzotti.github.io/ng-input-number-i18n)
 
-- TODO: [NPM](https://www.npmjs.com/package/@danielzotti/ng-input-number-i18n)
 
-- Try it yourself:
+- [NPM](https://www.npmjs.com/package/@danielzotti/ng-input-number-i18n)
   - Run `npm install`
   - Run `npm run start` for a dev server
   - Navigate to `http://localhost:4201/`
@@ -53,30 +58,29 @@ import { AppComponent } from "./app.component";
 export class AppModule {}
 ```
 
-## Use it in a `input`
+## Use it in `input`
 
 ```html
 <form #form="ngForm">
   ...
-  <input ngInputNumberI18n=".2-2" [(ngModel)]="value"
-               (ngInputNumberI18nValues)="updateValues($event)">
+  <input ngInputNumberI18n=".2-2" [(ngModel)]="value">
   ...
 </form>
 ```
 
-## ...or in a `textarea`
+## ...or in `textarea`
 
 ```html
 <form #form="ngForm">
   ...
-  <textarea [ngInputNumberI18n]="format" [(ngModel)]="value" (ngInputNumberI18nValues)="updateValues($event)"></textarea>
+  <textarea [ngInputNumberI18n]="format" [(ngModel)]="value"></textarea>
   ...
 </form>
 ```
 
 ### @Input and @Ouput
 
-#### @Input 
+#### Input 
 - `ngInputNumberI18n: digitsInfo`
     - See [DecimalPipe docs](https://angular.io/api/common/DecimalPipe#parameters) to learn how to handle `digitsInfo`
 - `onlyPositive: boolean` (default: false)
@@ -84,7 +88,7 @@ export class AppModule {}
 - `selectAllOnFocus: boolean` (default: true)
     - the input value is selected on focus   
 
-#### @Output
+#### Output
 - `ngInputNumberI18nValues: NgInputNumberI18nOutputValues`: emits an event with various information everytime the values change
 
 ```typescript
