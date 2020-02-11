@@ -21,8 +21,10 @@ A simple directive which manages decimal numbers in `input` and `textarea` insid
 
 - [Live demo](https://danielzotti.github.io/ng-input-number-i18n)
 
-
 - [npm](https://www.npmjs.com/package/@danielzotti/ng-input-number-i18n)
+
+
+- [GitHub demo](https://github.com/danielzotti/ng-input-number-i18n)
   - Run `npm install`
   - Run `npm run start` for a dev server
   - Navigate to `http://localhost:4201/`
