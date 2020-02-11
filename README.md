@@ -40,9 +40,9 @@ Run `npm i @danielzotti/ng-input-number-i18n --save`
 Import `NgInputNumberI18nModule` from `@danielzotti/ng-input-number-i18n` in `app.module.ts`
 
 Use `forRoot` to configure the `NgInputNumberI18nModule`:
-- `production`: `boolean`
+- `production`: `boolean` (default: `true`)
     - If `false` on double click event on input, all the values are logged in the console
-- `undoOnEsc`: `boolean`
+- `undoOnEsc`: `boolean` (default: `true`)
     - If `ESC` key is pressed the changes on input value are canceled
 - `pipe`: `CustomPipe`
     - The default format pipe can be overridden by a `CustomPipe`
@@ -96,9 +96,9 @@ export class AppModule {}
 #### Input 
 - `ngInputNumberI18n: digitsInfo`
     - See [DecimalPipe docs](https://angular.io/api/common/DecimalPipe#parameters) to learn how to handle `digitsInfo`
-- `onlyPositive: boolean` (default: false)
+- `onlyPositive: boolean` (default: `false`)
     - only positive number are permitted
-- `selectAllOnFocus: boolean` (default: true)
+- `selectAllOnFocus: boolean` (default: `true`)
     - the input value is selected on focus   
 
 #### Output
@@ -126,3 +126,5 @@ export interface NgInputNumberI18nOutputValues {
 ## Thanks to
 
 [How to built npm ready component library with Angular](https://codeburst.io/how-to-built-npm-ready-component-library-with-angular-a812a22dc1d5) by Mohan Ram
+
+[Providing Module Configuration Using forRoot() And Ahead-Of-Time Compiling In Angular 7.2.0](https://www.bennadel.com/blog/3565-providing-module-configuration-using-forroot-and-ahead-of-time-compiling-in-angular-7-2-0.htm) by Ben Nadel
