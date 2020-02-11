@@ -40,11 +40,13 @@ Run `npm i @danielzotti/ng-input-number-i18n --save`
 Import `NgInputNumberI18nModule` from `@danielzotti/ng-input-number-i18n` in `app.module.ts`
 
 Use `forRoot` to configure the `NgInputNumberI18nModule`:
+- `locale`: `string` (default: `it-IT`)
+    - set the default `locale`
 - `production`: `boolean` (default: `true`)
     - If `false` on double click event on input, all the values are logged in the console
 - `undoOnEsc`: `boolean` (default: `true`)
     - If `ESC` key is pressed the changes on input value are canceled
-- `pipe`: `CustomPipe`
+- `pipe`: `CustomPipe` (default: `NgInputNumberI18nPipe` which is a `DecimalPipe` with null check)
     - The default format pipe can be overridden by a `CustomPipe`
     - `CustomPipe` must `implement` the Angular `DecimalPipe`
 
