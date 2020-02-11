@@ -13,6 +13,8 @@ import localeZh from '@angular/common/locales/zh';
 import { FormsModule } from '@angular/forms';
 import { CustomFormatPipe } from './custom.pipe';
 
+export const DEFAULT_LOCALE = 'it-IT';
+
 export function initializeLocale() {
   // const locale = 'en-US';
   // registerLocaleData(localeEn, locale);
@@ -20,7 +22,7 @@ export function initializeLocale() {
   // registerLocaleData(localeFr, locale);
   // const locale = 'zh';
   // registerLocaleData(localeZh, locale);
-  const locale = 'it-IT';
+  const locale = DEFAULT_LOCALE;
   registerLocaleData(localeIt, locale);
   return locale;
 }
@@ -34,8 +36,8 @@ export function initializeLocale() {
     BrowserModule,
     CommonModule,
     FormsModule,
-    NgInputNumberI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: false, locale: initializeLocale() }),
-    // NgInputNumberI18nModule.forRoot({ production: false, undoOnEsc: true }),
+    // NgInputNumberI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: false, locale: DEFAULT_LOCALE }),
+    NgInputNumberI18nModule.forRoot(),
   ],
   providers: [
     CustomFormatPipe,

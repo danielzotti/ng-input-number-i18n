@@ -1,5 +1,6 @@
-import { Component, Inject, LOCALE_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgInputNumberI18nOutputValues } from '../../projects/ng-input-number-i18n/src/lib/ng-input-number-i18n.models';
+import { NgInputNumberI18nService } from '../../projects/ng-input-number-i18n/src/lib/ng-input-number-i18n.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,11 @@ export class AppComponent {
     '6.1-1',
   ];
 
-  constructor(@Inject(LOCALE_ID) private locale) {}
+  locale: string;
+
+  constructor(private service: NgInputNumberI18nService) {
+    this.locale = this.service.getLocale();
+  }
 
   updateValues(values: NgInputNumberI18nOutputValues){
     this.outputValues = values;

@@ -1,30 +1,27 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { getLocaleNumberSymbol, NumberSymbol } from '@angular/common';
-import { NgInputNumberI18nConfig } from './ng-input-number-i18n.config';
+import { NgInputNumberI18nConfig, NgInputNumberI18nDefaultLocale } from './ng-input-number-i18n.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NgInputNumberI18nService {
 
-  defaultLocale: 'en-US';
-
   configuration: NgInputNumberI18nConfig;
 
-  constructor(@Inject(LOCALE_ID) private locale: string, private config: NgInputNumberI18nConfig) {
-    debugger;
+  constructor(private config: NgInputNumberI18nConfig) {
     this.configuration = this.config;
   }
 
   getLocale() {
-    return this.locale;
+    return this.configuration.locale;
   }
 
   getLocaleDecimalSeparator(): string {
-    return getLocaleNumberSymbol(this.locale ? this.locale : this.defaultLocale, NumberSymbol.Decimal);
+    return getLocaleNumberSymbol(this.configuration.locale, NumberSymbol.Decimal);
   }
 
   getLocaleGroupSeparator(): string {
-    return getLocaleNumberSymbol(this.locale ? this.locale : this.defaultLocale, NumberSymbol.Group);
+    return getLocaleNumberSymbol(this.configuration.locale, NumberSymbol.Group);
   }
 }
