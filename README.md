@@ -40,8 +40,6 @@ Run `npm i @danielzotti/ng-input-number-i18n --save`
 Import `NgInputNumberI18nModule` from `@danielzotti/ng-input-number-i18n` in `app.module.ts`
 
 Use `forRoot` to configure the `NgInputNumberI18nModule`:
-- `locale`: `string` (default: `it-IT`)
-    - set the default `locale`
 - `production`: `boolean` (default: `true`)
     - If `false` on double click event on input, all the values are logged in the console
 - `undoOnEsc`: `boolean` (default: `true`)
@@ -58,17 +56,22 @@ import { FormsModule } from "@angular/forms";
 
 import { NgInputNumberI18nModule } from '@danielzotti/ng-input-number-i18n';
 
-import { AppComponent } from "./app.component";  
+import { AppComponent } from "./app.component";
+import { CustomFormatPipe } from './custom.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    CustomFormatPipe
+  ],
   imports: [
     BrowserModule,
     CommonModule,
     FormsModule, 
-    NgInputNumberI18nModule.forRoot({ production: false, undoOnEsc: true }),
+    NgInputNumberI18nModule.forRoot({ production: false, undoOnEsc: false, pipe: CustomFormatPipe }),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [CustomFormatPipe]
 })
 export class AppModule {}
 ```
@@ -119,7 +122,7 @@ export interface NgInputNumberI18nOutputValues {
 #### Full example
 
 ```html
-<input ngInputNumberI18n="format" 
+<input [ngInputNumberI18n]="format" 
        [(ngModel)]="value"
        [onlyPositive]="true" 
        [selectAllOnFocus]="false"
