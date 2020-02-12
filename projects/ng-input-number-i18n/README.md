@@ -2,20 +2,20 @@
 
 A simple directive which manages decimal numbers in `input` and `textarea` inside a `ngForm`.
 
-- It stores the values as a JavaScript float but it displays the formatted number based on `locale` (with decimal and thousands separator). 
-- On focus, it shows the real number with the decimal separator based on `locale`.
-- It formats numbers using a CustomPipe that extends the DecimalPipe.
-- It sanitizes number while typing (and also on paste) based on the locale thousands and decimal separator:
+- It stores the **value as a JavaScript float** but it displays the formatted number based on `locale` (with decimal and thousands separator). 
+- On **focus**, it shows the **real number with the decimal separator** based on `locale`.
+- It formats numbers using a CustomPipe that extends the Angular **DecimalPipe**.
+- It **sanitizes number** while typing (and also on paste) based on the locale thousands and decimal separator:
     - e.g. locale = `it-IT` accepts only
         - numbers: `0-9`
-        - minus sign: `-`
-        - thousands separator: `.`
-        - decimal separator: `,`
+        - one minus sign: `-`
+        - one thousands separator: `.`
+        - one decimal separator: `,`
     - e.g. locale = `en-US` accepts only
         - numbers: `0-9`
-        - minus sign: `-`
-        - thousands separator: `,`
-        - decimal separator: `.`
+        - one minus sign: `-`
+        - one thousands separator: `,`
+        - one decimal separator: `.`
 
 ## Try it yourself
 
@@ -104,7 +104,8 @@ export class AppModule {}
     - the input value is selected on focus   
 
 #### Output
-- `ngInputNumberI18nValues: NgInputNumberI18nOutputValues`: emits an event with various information everytime the values change
+- `ngInputNumberI18nValues: NgInputNumberI18nOutputValues` 
+    - emits an event with various information everytime the values change
 
 ```typescript
 export interface NgInputNumberI18nOutputValues {
