@@ -36,8 +36,8 @@ export function initializeLocale() {
     BrowserModule,
     CommonModule,
     FormsModule,
-    // NgInputNumberI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: false, locale: DEFAULT_LOCALE }),
-    NgInputNumberI18nModule.forRoot(),
+    NgInputNumberI18nModule.forRoot({ pipe: CustomFormatPipe, production: false, undoOnEsc: true }),
+    // NgInputNumberI18nModule.forRoot(),
   ],
   providers: [
     CustomFormatPipe,

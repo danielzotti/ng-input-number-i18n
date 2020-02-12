@@ -1,4 +1,4 @@
-import { InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
+import { InjectionToken, LOCALE_ID, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 
 import { NgInputNumberI18nDirective } from './ng-input-number-i18n.directive';
@@ -37,7 +37,7 @@ export class NgInputNumberI18nModule {
         {
           provide: NgInputNumberI18nPipe,
           useFactory: provideCustomPipe,
-          deps: [NgInputNumberI18nConfig]
+          deps: [LOCALE_ID, NgInputNumberI18nConfig]
         }
       ]
     };
@@ -52,6 +52,6 @@ export class NgInputNumberI18nModule {
 // NOTE: This value has to be exported otherwise the AoT compiler won't see it.
 export const FOR_ROOT_CONFIGURATION_TOKEN = new InjectionToken<NgInputNumberI18nConfig>('forRoot() NgInputNumberI18nConfig');
 
-export function provideCustomPipe(config: NgInputNumberI18nConfig): DecimalPipe {
-  return new config.pipe(config.locale);
+export function provideCustomPipe(locale: string, config: NgInputNumberI18nConfig): DecimalPipe {
+  return new config.pipe(locale);
 }
